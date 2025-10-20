@@ -30,10 +30,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    isVerified: {
-      type: Boolean,
-      default: false,
-    },
     role: {
       type: String,
       enum: ["corporate_admin", "team_member"],
@@ -62,10 +58,6 @@ const userSchema = new mongoose.Schema(
         type: Date,
         default: null,
       },
-    },
-    lastLogin: {
-      type: Date,
-      default: null,
     },
   },
   { timestamps: true }

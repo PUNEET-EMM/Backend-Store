@@ -1,0 +1,60 @@
+# ========================================
+# Node.js / Express
+# ========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+*.log
+coverage/
+dist/
+build/
+tmp/
+cache/
+
+# ========================================
+# Environment Files
+# ========================================
+.env
+.env.*
+!.env.example        # keep only example env for reference
+
+# specifically ignore your local/staging envs
+.env.local
+.env.stag
+
+# ========================================
+# Docker
+# ========================================
+# Docker build and config artifacts
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Docker data / volumes
+**/docker-data/
+**/docker-cache/
+**/db_data/
+**/volumes/
+
+# ========================================
+# OS and Editor Files
+# ========================================
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+*.pid
+*.seed
+*.pid.lock
+
+# ========================================
+# Miscellaneous
+# ========================================
+uploads/
+*.tgz
+*.bak
+*.tmp

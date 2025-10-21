@@ -10,7 +10,7 @@ router.get('/health', (req, res) => {
   return success(res, {}, 'Server is running', HTTP_STATUS.OK);
 });
 
-router.use('/category',categoryRoute );
+// router.use('/category',categoryRoute );
 
 
 // router.use((req, res) => {

@@ -1,6 +1,7 @@
 import express from "express";
 import { errorHandler } from "./middleware/errorHandler.js";
 import  corporateroutes from './routes/corporate-user/index.js';
+import  crmroutes from './routes/crm/index.js';
 
 
 const app = express();
@@ -12,7 +13,11 @@ app.get("/", (req, res) => {
 });
 
 
-app.use('/api/v1', corporateroutes);
+
+
+app.use('/api/v1/', corporateroutes);
+app.use('/api/v1/crm',crmroutes );
+
 
 
 app.use(errorHandler);

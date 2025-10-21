@@ -1,8 +1,9 @@
-import InternalUser from "../../models/crm/internalUserSchema.js";
+import InternalUser from "../../models/crm/InternalUser.js";
 import { sendError, success } from "../../utils/apiResponse.js";
 import logger from "../../utils/logger.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import  {generateInternalToken} from "../../utils/crm/authUtlis.js"
 
 export const registerInternalUser = async (req, res) => {
   try {
@@ -48,15 +49,7 @@ export const registerInternalUser = async (req, res) => {
     });
 
     // Generate JWT token
-    const token = jwt.sign(
-      { 
-        userId: internalUser._id, 
-        email: internalUser.email,
-        role: internalUser.role 
-      },
-      process.env.JWT_SECRET || "your-secret-key",
-      { expiresIn: "7d" }
-    );
+    const token = generateInternalToken(internalUser)
 
     // Response (exclude password)
     return success(
@@ -130,7 +123,11 @@ export const loginInternalUser = async (req, res) => {
     await user.updateLastLogin();
 
     // Generate JWT token
-    const token = generateInternalToken(internalUser);
+    const token = generateInternalToken(  { 
+        userId: user._id, 
+        email: user.email,
+        role: user.role 
+      });
 
 
     logger.mongo("info", "Internal user logged in successfully", {

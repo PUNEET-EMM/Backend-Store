@@ -16,8 +16,6 @@ router.use('/corporate/auth', authRoutes);
 
 
 
-router.use((req, res) => {
-  return sendError(res, 'Route not found', HTTP_STATUS.NOT_FOUND, { path: req.originalUrl });
-});
+
 
 export default router;

@@ -1,4 +1,4 @@
-import InternalUser from "../../models/crm/InternalUser.js";
+import InternalUser from "../../models/crm/internalUserSchema.js";
 import { sendError, success } from "../../utils/apiResponse.js";
 import logger from "../../utils/logger.js";
 import bcrypt from "bcrypt";
@@ -123,11 +123,13 @@ export const loginInternalUser = async (req, res) => {
     await user.updateLastLogin();
 
     // Generate JWT token
-    const token = generateInternalToken(  { 
-        userId: user._id, 
+    const token = generateInternalToken( { 
+        _id: user._id, 
         email: user.email,
         role: user.role 
       });
+
+
 
 
     logger.mongo("info", "Internal user logged in successfully", {

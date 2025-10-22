@@ -80,6 +80,11 @@ const categorySchema = new mongoose.Schema({
   stats: {
     subcategoriesCount: { type: Number, default: 0 },
     productsCount: { type: Number, default: 0 }
+  },
+   createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "InternalUser",
+    required: true,
   }
 }, {
   timestamps: true
@@ -90,23 +95,27 @@ categorySchema.index({ slug: 1 });
 categorySchema.index({ isActive: 1 });
 categorySchema.index({ 'subcategories.slug': 1 });
 
-// PRE-SAVE: Generate slug
-categorySchema.pre('save', function(next) {
-  if (this.isModified('name') && !this.slug) {
-    this.slug = this.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+categorySchema.pre('validate', function(next) {
+  if (this.isModified('name')) {
+    this.slug = this.name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
   }
-  
-  // Auto-generate slugs for subcategories
+
   this.subcategories.forEach(sub => {
-    if (!sub.slug) {
-      sub.slug = sub.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    if (!sub.slug && sub.name) {
+      sub.slug = sub.name
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
     }
   });
-  
-  // Update stats
+
   this.stats.subcategoriesCount = this.subcategories.filter(s => s.isActive).length;
-  
+
   next();
 });
 
-const Category = mongoose.model('Category', categorySchema);
+
+export const Category = mongoose.model('Category', categorySchema);

@@ -1,5 +1,4 @@
-import jwt from "jsonwebtoken";
-import InternalUser from "../../models/crm/InternalUser.js";
+import InternalUser from "../../models/crm/internalUserSchema.js";
 import { sendError } from "../../utils/apiResponse.js";
 import logger from "../../utils/logger.js";
 import { verifyInternalToken } from "../../utils/crm/authUtlis.js";
@@ -7,6 +6,7 @@ import { verifyInternalToken } from "../../utils/crm/authUtlis.js";
 export const authenticateInternalUser = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.replace("Bearer ", "");
+
 
     if (!token) {
       return sendError(res, "Authentication token is required", 401);

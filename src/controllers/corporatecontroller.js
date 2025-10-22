@@ -4,7 +4,6 @@ import User from "../models/User.js";
 import logger from "../utils/logger.js";
 
 export const registerCorporate = async (req, res) => {
-    console.log("debug")
   try {
     const {
       companyLegalName,

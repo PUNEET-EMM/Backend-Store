@@ -50,7 +50,6 @@ const internalUserSchema = new mongoose.Schema(
 );
 
 // Indexes
-internalUserSchema.index({ email: 1 });
 internalUserSchema.index({ isActive: 1 });
 
 // Method to update last login

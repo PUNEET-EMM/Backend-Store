@@ -164,8 +164,6 @@ const productSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 /* ---------------------- INDEXES ---------------------- */
-productSchema.index({ sku: 1 });
-productSchema.index({ slug: 1 });
 productSchema.index({ categoryId: 1, subCategoryId: 1 });
 productSchema.index({ name: "text", description: "text" });
 

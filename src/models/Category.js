@@ -91,7 +91,6 @@ const categorySchema = new mongoose.Schema({
 });
 
 // INDEXES
-categorySchema.index({ slug: 1 });
 categorySchema.index({ isActive: 1 });
 categorySchema.index({ 'subcategories.slug': 1 });
 

@@ -95,6 +95,11 @@ const productSchema = new mongoose.Schema({
     required: [true, 'Selling price is required'],
     min: 0
   },
+  moq: {
+    type: Number,
+    default: 1,
+    min: 1,
+  },
   discountPercent: {
     type: Number,
     default: 0
